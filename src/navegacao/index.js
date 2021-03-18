@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Stack from './Stack';
 
-const navigate = (props) => {
+export default props => {
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer>
@@ -13,4 +13,3 @@ const navigate = (props) => {
   );
 }
 
-export default navigate;

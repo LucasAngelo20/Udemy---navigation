@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import TelaA from '../views/TelaA';
 import TelaB from '../views/TelaB';
 import TelaC from '../views/TelaC';
+import PassoStack from '../components/PassoStack';
 
 const Stack = createStackNavigator();
 
@@ -11,13 +12,27 @@ export default props => {
     <Stack.Navigator
       initialRouteName="TelaA"
       screenOptions={{ headerShown: true }}>
-      <Stack.Screen
-        name="TelaA"
-        options={{ title: 'Informações iniciais' }}
-        component={TelaA}
-      />
-      <Stack.Screen name="TelaB" component={TelaB} />
-      <Stack.Screen name="TelaC" component={TelaC} />
+      <Stack.Screen name="TelaA" options={{ title: 'Informações iniciais' }}>
+        {props => (
+          <PassoStack {...props} avancar="TelaB">
+            <TelaA />
+          </PassoStack>
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="TelaB" options={{ title: 'Mais informações' }}>
+        {props => (
+          <PassoStack {...props} avancar="TelaC">
+            <TelaB />
+          </PassoStack>
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="TelaC" options={{ title: 'Conteúdo' }}>
+        {props => (
+          <PassoStack {...props} avancar="TelaA">
+            <TelaC />
+          </PassoStack>
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };
